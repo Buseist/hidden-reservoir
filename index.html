@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f9ff">
+  <title>Hidden Reservoir — A Feedback Experiment</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-header">
+      <p class="eyebrow">INTERACTIVE FEEDBACK EXPERIMENT</p>
+      <h1>Hidden Reservoir</h1>
+      <p class="intro">Try to stop the draining reservoir close to 50 units. Then explain how you decided when to act.</p>
+    </header>
+
+    <section class="mode-panel" aria-labelledby="mode-heading">
+      <div>
+        <p class="section-kicker">EXPERIMENT SETUP</p>
+        <h2 id="mode-heading">Choose a feedback mode</h2>
+      </div>
+      <div class="mode-buttons" role="group" aria-label="Feedback mode">
+        <button class="mode-button is-selected" id="fullModeButton" type="button" aria-pressed="true">
+          <span class="mode-title">Full Feedback</span>
+          <span class="mode-description">See the live reservoir state.</span>
+        </button>
+        <button class="mode-button" id="ackModeButton" type="button" aria-pressed="false">
+          <span class="mode-title">Acknowledgement Only</span>
+          <span class="mode-description">Only see confirmation that an action was received.</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="reservoir-card" aria-labelledby="reservoir-heading">
+      <div class="card-heading">
+        <div>
+          <p class="section-kicker">LIVE SIMULATION</p>
+          <h2 id="reservoir-heading">Reservoir</h2>
+        </div>
+        <span class="mode-chip" id="modeChip">Full Feedback</span>
+      </div>
+
+      <div class="tank-stage">
+        <div class="tank" id="tank" role="img" aria-label="Reservoir tank showing the current water level">
+          <div class="water" id="water"></div>
+          <span class="tank-mark tank-mark-top" aria-hidden="true">100</span>
+          <span class="tank-mark tank-mark-middle" aria-hidden="true">50</span>
+          <span class="tank-mark tank-mark-bottom" aria-hidden="true">0</span>
+        </div>
+        <div class="state-readout" id="stateFeedback">
+          <p class="level-value"><span id="levelValue">80</span><span class="unit"> units</span></p>
+          <p class="status-label" id="statusLabel">Paused</p>
+        </div>
+        <div class="hidden-readout" id="hiddenReadout" hidden>
+          <span class="hidden-icon" aria-hidden="true">◌</span>
+          <p>Live reservoir information is hidden.</p>
+          <p class="hidden-subtext">Your actions are still being applied to the system.</p>
+        </div>
+      </div>
+
+      <p class="acknowledgement" id="acknowledgement" aria-live="polite" aria-atomic="true"></p>
+
+      <div class="controls" aria-label="Reservoir controls">
+        <button class="control-button primary" id="addButton" type="button">Add 10</button>
+        <button class="control-button secondary" id="startButton" type="button">Start draining</button>
+        <button class="control-button secondary" id="pauseButton" type="button">Pause</button>
+        <button class="control-button quiet" id="resetButton" type="button">Reset</button>
+      </div>
+
+      <div class="reveal-row" id="revealRow" hidden>
+        <button class="control-button reveal-button" id="revealButton" type="button">Reveal result</button>
+      </div>
+
+      <p class="control-hint" id="controlHint">Add 10 is available while the reservoir is paused.</p>
+    </section>
+
+    <section class="rules-panel" aria-labelledby="rules-heading">
+      <p class="section-kicker">SYSTEM RULES</p>
+      <h2 id="rules-heading">How the reservoir works</h2>
+      <ul>
+        <li>Capacity: 100 units</li>
+        <li>Starting level: 80 units</li>
+        <li>Drain rate: 5 units per second</li>
+        <li>Add 10 works only while paused.</li>
+        <li>Pause stops draining immediately.</li>
+      </ul>
+      <p class="target-note" id="targetNote">Task: try to stop between 40 and 60 units.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>Same reservoir rules in both modes. Only the feedback you can see changes.</p>
+    </footer>
+  </main>
+</body>
+</html>
